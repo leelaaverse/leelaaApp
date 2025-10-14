@@ -36,7 +36,11 @@ let users = [
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to leelaaApp API - AI-powered social media' });
+  res.json({ message: 'Welcome to leelaaApp API - AI-powered social media', status: 'healthy' });
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
 });
 
 // Get all posts
