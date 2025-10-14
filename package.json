@@ -1,0 +1,25 @@
+{
+  "name": "leelaaapp",
+  "version": "1.0.0",
+  "description": "AI-powered social media platform for leelaaverse",
+  "scripts": {
+    "install-all": "cd backend && npm install && cd ../frontend && npm install",
+    "start-backend": "cd backend && npm start",
+    "start-frontend": "cd frontend && npm start",
+    "dev-backend": "cd backend && npm run dev",
+    "build-frontend": "cd frontend && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leelaaverse/leelaaApp.git"
+  },
+  "keywords": [
+    "social-media",
+    "ai",
+    "react",
+    "node",
+    "express"
+  ],
+  "author": "leelaaverse",
+  "license": "Apache-2.0"
+}
