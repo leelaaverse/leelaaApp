@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leelaah/utils/helper.dart';
+import 'package:leelaah/utils/shared_preferences_handler.dart';
 
 import '../../auth/screen/login_screen.dart';
 import '../manage/bloc/dashboard_bloc.dart';
@@ -23,6 +24,7 @@ class AppDrawer extends StatelessWidget with Helper {
               msg: "Are you sure you want to logout?",
               title: "Logout",
               onYesPress: () {
+                SharedPreferencesHandler().clearPreference();
                 callNextAndClearStack(LoginScreen());
               },
             );

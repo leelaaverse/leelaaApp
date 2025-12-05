@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.appColor),
+        scaffoldBackgroundColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.appColor,),
       ),
       home: SplashScreen(),
     );

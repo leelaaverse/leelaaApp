@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import '../constants/strings.dart';
 import '../network/api_service.dart';
@@ -14,15 +15,7 @@ class AuthRepository with Helper {
 
     try {
       Map<String, dynamic> body = {
-        "password": password,
-        "fcmToken": "",
-        "deviceType": Platform.isAndroid ? "android" : "ios",
-      };
-      if (email.contains("@")) {
-        body['email'] = email;
-      } else {
-        body['phone'] = email;
-      }
+        "password": password, "email": email};
 
       print(body);
 
@@ -34,36 +27,33 @@ class AuthRepository with Helper {
       );
       print("response");
       print(response.toJson());
-      if (response.token != null) {
+      if (response.success ?? false) {
         SharedPreferencesHandler().storeBoolData(userLoginValue, true);
         SharedPreferencesHandler().storeStringData(
           appToken,
-          response.token ?? "",
+          response.data?.accessToken ?? "",
         );
         SharedPreferencesHandler().storeStringData(
           userName,
-          response.user!.name ?? "",
+          response.data?.user?.firstName ?? "",
         );
         SharedPreferencesHandler().storeStringData(userImage, getAvatar());
-        SharedPreferencesHandler().storeStringData(
-          userNumber,
-          (response.user!.phoneCode ?? "") + (response.user!.phone ?? ""),
-        );
+        // SharedPreferencesHandler().storeStringData(
+        //   userNumber,
+        //   (response.user!.phoneCode ?? "") + (response.user!.phone ?? ""),
+        // );
         SharedPreferencesHandler().storeStringData(
           userEmail,
-          (response.user!.email ?? ""),
+          response.data?.user?.email ?? "",
         );
 
         SharedPreferencesHandler().storeStringData(
           userId,
-          response.user!.sId ?? "",
+          response.data?.user?.id ?? "",
         );
         // saveBox.write(isNotificationEnabled, response['isNotificationEnabled']);
         return {"msg": "", "response": response.toJson()};
       } else {
-        if (response.success ?? false) {
-          return {"msg": "otp", "response": response.toJson()};
-        }
         return {"msg": response.message ?? ""};
       }
     } catch (e) {
@@ -72,22 +62,11 @@ class AuthRepository with Helper {
     }
   }
 
-  Future<String> userRegister(String name,
-      String email,
-      String code,
-      String phone,
-      String password,) async {
+  Future<String> userRegister(Map<String, dynamic> body) async {
     // String? fcmToken = await FirebaseMessaging.instance.getToken();
 
     try {
-      Map<String, dynamic> body = {
-        "name": name,
-        "email": email,
-        "phoneCode": code,
-        "phone": phone,
-        "password": password,
-      };
-      print(body);
+      print(jsonEncode(body));
 
       var response = await apiService.postRequest<Map<String, dynamic>>(
         AppUrl.userRegister,
@@ -141,6 +120,29 @@ class AuthRepository with Helper {
     }
   }
 
+  Future<Map<String, dynamic>> forgotPasswordAPi(String number) async {
+    try {
+      Map<String, dynamic> body = {"email": number};
+      print(body);
+
+      var response = await apiService.postRequest<Map<String, dynamic>>(
+        AppUrl.forgotPassword,
+        body,
+            (json) => json,
+        requiresAuth: false,
+      );
+      print("response");
+      print(response);
+      if (response['success']) {
+        return {"success": true, "msg": response['message']};
+      }
+      return {"success": false, "msg": response['message'] ?? ""};
+    } catch (e) {
+      // callSnackBar("Error", e.toString());
+      return {"success": false, "msg": e.toString()};
+    }
+  }
+
   Future<String> sendOtpApi(String number) async {
     try {
       Map<String, dynamic> body = {"phone": number};
@@ -149,7 +151,7 @@ class AuthRepository with Helper {
       var response = await apiService.postRequest<Map<String, dynamic>>(
         AppUrl.sendOtp,
         body,
-            (json) => json,
+        (json) => json,
         requiresAuth: false,
       );
       print("response");
@@ -208,30 +210,29 @@ class AuthRepository with Helper {
       print("response");
       print(response.toJson());
       if (fromLogin) {
-        if (response.token != null) {
+        if (response.success ?? false) {
           SharedPreferencesHandler().storeBoolData(userLoginValue, true);
           SharedPreferencesHandler().storeStringData(
             appToken,
-            response.token ?? "",
+            response.data?.accessToken ?? "",
           );
           SharedPreferencesHandler().storeStringData(
             userName,
-            response.user!.name ?? "",
+            response.data?.user?.firstName ?? "",
           );
           SharedPreferencesHandler().storeStringData(userImage, getAvatar());
-
-          SharedPreferencesHandler().storeStringData(
-            userNumber,
-            (response.user!.phoneCode ?? "") + (response.user!.phone ?? ""),
-          );
+          // SharedPreferencesHandler().storeStringData(
+          //   userNumber,
+          //   (response.user!.phoneCode ?? "") + (response.user!.phone ?? ""),
+          // );
           SharedPreferencesHandler().storeStringData(
             userEmail,
-            (response.user!.email ?? ""),
+            response.data?.user?.email ?? "",
           );
 
           SharedPreferencesHandler().storeStringData(
             userId,
-            response.user!.sId ?? "",
+            response.data?.user?.id ?? "",
           );
           // saveBox.write(isNotificationEnabled, response['isNotificationEnabled']);
           return "";

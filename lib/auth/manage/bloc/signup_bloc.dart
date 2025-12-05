@@ -10,7 +10,9 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> with Helper {
     on<DataChange>((event, emit) {
       emit(
         state.copyWith(
-          name: event.name,
+          firstName: event.firstName,
+          lastName: event.lastName,
+          userName: event.userName,
           password: event.password,
           countryCode: event.countryCode,
           number: event.number,
@@ -36,26 +38,29 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> with Helper {
 
     on<SignUpSubmit>((event, emit) async {
       if (fieldCheck(state).isEmpty) {
-        // emit(
-        //   state.copyWith(
-        //     isSubmitting: true,
-        //     errorMessage: null,
-        //     isSuccess: false,
-        //   ),
-        // );
-        // String response = await AuthRepository().userRegister(
-        //   state.name,
-        //   state.email,
-        //   state.countryCode,
-        //   state.number,
-        //   state.password,
-        // );
-        //
-        // if (response.isEmpty) {
-        //   emit(state.copyWith(isSubmitting: false, isSuccess: true));
-        // } else {
-        //   emit(state.copyWith(isSubmitting: false, errorMessage: response));
-        // }
+        Map<String, dynamic> body = {
+          "username": state.userName,
+          "email": state.email,
+          "password": state.password,
+          "firstName": state.firstName,
+          "lastName": state.lastName
+        };
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            errorMessage: null,
+            isSuccess: false,
+          ),
+        );
+        String response = await AuthRepository().userRegister(
+            body
+        );
+
+        if (response.isEmpty) {
+          emit(state.copyWith(isSubmitting: false, isSuccess: true));
+        } else {
+          emit(state.copyWith(isSubmitting: false, errorMessage: response));
+        }
       } else {
         emit(
           state.copyWith(
@@ -72,17 +77,20 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> with Helper {
   }
 
   String fieldCheck(SignupState state) {
-    if (state.name.isEmpty) {
-      return "Please enter name";
+    if (state.firstName.isEmpty) {
+      return "Please enter first name";
+    } else if (state.lastName.isEmpty) {
+      return "Please enter last name";
     } else if (state.email.isEmpty) {
       return "Please enter email";
-    } else if (state.countryCode.isEmpty) {
+    }
+    /*else if (state.countryCode.isEmpty) {
       return "Please select Country Code";
     } else if (state.number.isEmpty) {
       return "Please enter phone number";
     } else if (state.number.length < 10) {
       return "Please enter valid phone number";
-    } else if (state.password.isEmpty) {
+    } */ else if (state.password.isEmpty) {
       return "Please enter password";
     } else if (state.password.length < 6) {
       return "Password must be of 6 digits";

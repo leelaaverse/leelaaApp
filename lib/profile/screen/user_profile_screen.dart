@@ -23,7 +23,7 @@ class UserProfileScreen extends StatelessWidget with Helper {
       UserProfileBloc()
         ..add(GetInitialData(userFor)),
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
 
@@ -234,6 +234,7 @@ class UserProfileScreen extends StatelessWidget with Helper {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
+                                  color: Colors.white
                               ),
                             ),
                             const Text(
@@ -243,6 +244,7 @@ class UserProfileScreen extends StatelessWidget with Helper {
                             const SizedBox(height: 5),
                             const Text(
                               "Digital Goodies Team · Web & Mobile UI/UX Development · Graphics · Illustrations",
+                              style: TextStyle(color: Colors.white),
                             ),
                             const SizedBox(height: 5),
                             Text(
@@ -261,16 +263,16 @@ class UserProfileScreen extends StatelessWidget with Helper {
                     unselectedLabelColor: Colors.grey,
                     tabs: const [
                       Tab(text: "Posts"),
-                      Tab(text: "Followers"),
-                      Tab(text: "Following"),
+                      Tab(text: "Draft")
                     ],
                   ),
                   Expanded(
                     child: TabBarView(
                       children: [
                         profilePostsWidget(),
-                        followersScreenWidget(bloc),
-                        followingScreenWidget(bloc),
+                        profilePostsWidget(),
+                        // followersScreenWidget(bloc),
+                        // followingScreenWidget(bloc),
                       ],
                     ),
                   ),

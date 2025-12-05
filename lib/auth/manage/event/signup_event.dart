@@ -11,13 +11,15 @@ class DataChange extends SignupEvent {
   final String? countryCode;
   final String? password;
   final String? confirmPassword;
-  final String? name;
+  final String? firstName;
+  final String? lastName;
   final String? userName;
   final String? image;
 
   DataChange({
     this.userName,
-    this.name,
+    this.firstName,
+    this.lastName,
     this.email,
     this.number,
     this.countryCode,

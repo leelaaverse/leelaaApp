@@ -8,9 +8,9 @@ class LoginState {
   final String errorMessage;
 
   LoginState({
-    required this.email,
+    this.email = "test724@example.com",
     this.number,
-    required this.password,
+    this.password = "SecurePassword123!",
     this.isSubmitting = false,
     this.isEyeOpen = false,
     this.isSuccess = false,

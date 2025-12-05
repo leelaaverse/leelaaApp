@@ -39,6 +39,7 @@ class SignupScreen extends StatelessWidget with Helper {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 25,
+                            color: Colors.white
                         ),
                       ),
                       SizedBox(height: 20),
@@ -129,11 +130,28 @@ class SignupScreen extends StatelessWidget with Helper {
                         ],
                       ),
                       SizedBox(height: 30),
-                      CustomTextField(
-                        onChanged: (value) => bloc.add(DataChange(name: value)),
-                        hintText: "Name",
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.text,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomTextField(
+                              onChanged: (value) =>
+                                  bloc.add(DataChange(firstName: value)),
+                              hintText: "First Name",
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.text,
+                            ),
+                          ),
+                          SizedBox(width: 20,),
+                          Expanded(
+                            child: CustomTextField(
+                              onChanged: (value) =>
+                                  bloc.add(DataChange(lastName: value)),
+                              hintText: "Last Name",
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.text,
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 15),
                       CustomTextField(
@@ -151,66 +169,66 @@ class SignupScreen extends StatelessWidget with Helper {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      SizedBox(height: 15),
-                      IntrinsicHeight(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showCountryPicker(
-                                    context: context,
-                                    showPhoneCode: true,
-                                    favorite: ['in', 'us', 'ca', 'au', 'nz'],
-                                    countryListTheme: CountryListThemeData(
-                                      bottomSheetHeight: screenHeight * 0.6,
-                                    ),
-                                    // optional. Shows phone code before the country name.
-                                    onSelect: (Country country) =>
-                                        bloc.add(
-                                          DataChange(
-                                            countryCode: "+${country
-                                                .phoneCode}",
-                                          ),
-                                        ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(
-                                      color: Colors.black,
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      state.countryCode,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              flex: 10,
-                              child: CustomTextField(
-                                onChanged: (value) =>
-                                    bloc.add(DataChange(number: value)),
-                                hintText: "Phone Number",
-                                textInputAction: TextInputAction.next,
-                                maxLength: 10,
-                                keyboardType: TextInputType.number,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(height: 15),
+                      // IntrinsicHeight(
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         flex: 2,
+                      //         child: GestureDetector(
+                      //           onTap: () {
+                      //             showCountryPicker(
+                      //               context: context,
+                      //               showPhoneCode: true,
+                      //               favorite: ['in', 'us', 'ca', 'au', 'nz'],
+                      //               countryListTheme: CountryListThemeData(
+                      //                 bottomSheetHeight: screenHeight * 0.6,
+                      //               ),
+                      //               // optional. Shows phone code before the country name.
+                      //               onSelect: (Country country) =>
+                      //                   bloc.add(
+                      //                     DataChange(
+                      //                       countryCode: "+${country
+                      //                           .phoneCode}",
+                      //                     ),
+                      //                   ),
+                      //             );
+                      //           },
+                      //           child: Container(
+                      //             decoration: BoxDecoration(
+                      //               borderRadius: BorderRadius.circular(5),
+                      //               border: Border.all(
+                      //                 color: Colors.white70,
+                      //                 width: 1,
+                      //               ),
+                      //             ),
+                      //             child: Center(
+                      //               child: Text(
+                      //                 state.countryCode,
+                      //                 style: TextStyle(
+                      //                   color: Colors.white,
+                      //                   fontSize: 14,
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //       SizedBox(width: 10),
+                      //       Expanded(
+                      //         flex: 10,
+                      //         child: CustomTextField(
+                      //           onChanged: (value) =>
+                      //               bloc.add(DataChange(number: value)),
+                      //           hintText: "Phone Number",
+                      //           textInputAction: TextInputAction.next,
+                      //           maxLength: 10,
+                      //           keyboardType: TextInputType.number,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(height: 15),
                       CustomTextField(
                         isPassword: true,
@@ -245,7 +263,7 @@ class SignupScreen extends StatelessWidget with Helper {
                             ),
                       ),
 
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 60),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: CustomButton(
@@ -265,7 +283,7 @@ class SignupScreen extends StatelessWidget with Helper {
                             children: [
                               TextSpan(
                                 text: "Already have an account? ",
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.white),
                               ),
                               TextSpan(
                                 recognizer: TapGestureRecognizer()

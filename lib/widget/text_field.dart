@@ -74,16 +74,16 @@ class CustomTextField extends StatelessWidget {
       },
       decoration: InputDecoration(
         // hintText: hintText,
-        hintStyle: TextStyle(color: Colors.black54),
+        hintStyle: TextStyle(color: Colors.white70),
         labelText: hintText,
-        labelStyle: TextStyle(color: Colors.black54),
+        labelStyle: TextStyle(color: Colors.white70),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: Colors.black, width: 1),
+          borderSide: BorderSide(color: Colors.white, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: Colors.black, width: 1),
+          borderSide: BorderSide(color: Colors.white, width: 1),
         ),
         contentPadding: EdgeInsets.symmetric(
           vertical: verticalPadding,
@@ -110,7 +110,7 @@ class CustomTextField extends StatelessWidget {
             ) // Display the search icon if true
                 : null),
       ),
-      style: TextStyle(color: Colors.black, fontSize: 13),
+      style: TextStyle(color: Colors.white, fontSize: 13),
       onChanged: onChanged,
     );
   }

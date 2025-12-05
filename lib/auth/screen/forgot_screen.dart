@@ -35,7 +35,8 @@ class ForgotScreen extends StatelessWidget with Helper {
                         onTap: () => bloc.add(BackCall()),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 30, left: 2),
-                          child: Icon(Icons.arrow_back_ios_new_sharp),
+                          child: Icon(Icons.arrow_back_ios_new_sharp,
+                            color: Colors.white,),
                         ),
                       ),
                       Padding(
@@ -44,28 +45,30 @@ class ForgotScreen extends StatelessWidget with Helper {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: screenHeight * 0.06),
-                            Center(child: Image.asset(logo, width: 200)),
+                            Center(child: Image.asset(logo, width: 200,
+                              fit: BoxFit.fitWidth,)),
                             SizedBox(height: screenHeight * 0.06),
                             Text(
                               txtForgotPassword,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
+                                color: Colors.white,
                                 fontSize: 25,
                               ),
                             ),
                             Text(
                               "No stress, We’ll help you get back in.",
-                              style: TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize: 13,
+                                  color: Colors.white70),
                             ),
                             SizedBox(height: 25),
                             CustomTextField(
                               onChanged:
                                   (value) =>
-                                  bloc.add(DataChange(number: value)),
-                              hintText: "Phone Number",
+                                      bloc.add(DataChange(email: value)),
+                              hintText: "Email",
                               textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
+                              keyboardType: TextInputType.emailAddress,
                             ),
 
                             const SizedBox(height: 25),

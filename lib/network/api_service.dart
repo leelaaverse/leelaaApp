@@ -66,6 +66,9 @@ class ApiService with Helper {
     } on FormatException {
       loading.hideLoading();
       throw BadRequestException();
+    } on ToManyRequestException {
+      loading.hideLoading();
+      throw ToManyRequestException();
     } on UnauthorizedException {
       // saveBox.clearPreference();
       // saveBox.storeBoolData(userLoginValue, false);
@@ -94,6 +97,8 @@ class ApiService with Helper {
       case 401:
       case 403:
         throw UnauthorizedException();
+      case 429:
+        throw ToManyRequestException();
       case 404:
         throw NotFoundException();
       case 500:

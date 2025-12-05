@@ -8,24 +8,33 @@ import '../state/forgot_state.dart';
 class ForgotBloc extends Bloc<ForgotEvent, ForgotState> with Helper {
   ForgotBloc() : super(ForgotState.initial()) {
     on<DataChange>((event, emit) {
-      emit(state.copyWith(number: event.number));
+      emit(state.copyWith(email: event.email));
     });
 
     on<SubmitCall>((event, emit) async {
-      if (!state.number.isEmpty) {
+      if (!state.email.isEmpty) {
         emit(state.copyWith(isSubmitting: true, errorMessage: null));
-        String response = await AuthRepository().sendOtpApi(state.number);
+        Map<String, dynamic> response = await AuthRepository()
+            .forgotPasswordAPi(state.email);
 
-        if (response.isEmpty) {
-          emit(state.copyWith(isSubmitting: false, isSuccess: true));
+        if (response['success']) {
+          emit(
+            state.copyWith(
+              isSubmitting: false,
+              isSuccess: true,
+              successMessage: response['msg'],
+            ),
+          );
         } else {
-          emit(state.copyWith(isSubmitting: false, errorMessage: response));
+          emit(
+            state.copyWith(isSubmitting: false, errorMessage: response['msg']),
+          );
         }
       } else {
         emit(
           state.copyWith(
             isSubmitting: false,
-            errorMessage: "Please enter number",
+            errorMessage: "Please enter email",
           ),
         );
       }

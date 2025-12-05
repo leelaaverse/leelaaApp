@@ -16,7 +16,6 @@ class Dashboard extends StatelessWidget with Helper {
       DashboardBloc()
         ..add(GetInitialData()),
       child: Scaffold(
-        backgroundColor: Colors.white,
         drawer: AppDrawer(),
 
         // floatingActionButton: FloatingActionButton(
@@ -57,7 +56,11 @@ class Dashboard extends StatelessWidget with Helper {
                         children: [
                           GestureDetector(
                             onTap: () => bloc.add(DrawerOpenClick()),
-                            child: Image.asset(menu_icon, height: 30),
+                            child: Image.asset(
+                              menu_icon,
+                              height: 30,
+                              color: Colors.white,
+                            ),
                           ),
                           Row(
                             children: [
@@ -88,7 +91,11 @@ class Dashboard extends StatelessWidget with Helper {
                                 ),
                               ),
                               SizedBox(width: 10),
-                              Icon(Icons.notifications, size: 34),
+                              Icon(
+                                Icons.notifications,
+                                size: 34,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                         ],
@@ -257,18 +264,18 @@ class Dashboard extends StatelessWidget with Helper {
                           onTap: () => bloc.add(GenerateNewClick()),
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(30),
                               border: Border.all(color: Colors.white, width: 1),
                               color: Colors.black,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 vertical: 14.0,
-                                horizontal: 26,
+                                horizontal: 35,
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(6),
                                   border: Border.all(
                                     color: Colors.white,
                                     width: 1,
@@ -278,7 +285,7 @@ class Dashboard extends StatelessWidget with Helper {
                                 child: Icon(
                                   Icons.add,
                                   color: Colors.white,
-                                  size: 28,
+                                  size: 25,
                                 ),
                               ),
                             ),

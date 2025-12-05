@@ -32,12 +32,21 @@ class LoginScreen extends StatelessWidget with Helper {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: screenHeight * 0.09),
+                      SizedBox(height: screenHeight * 0.05),
+                      Center(child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 80),
+                        child: Image.asset(logo,
+                          fit: BoxFit.fitWidth,
+                          width: double.infinity,),
+                      )),
+                      SizedBox(height: screenHeight * 0.04),
                       Text(
                         "To begin, enter your\nphone number/email\naddress.",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 25,
+                          color: Colors.white,
+                          fontSize: 24,
                         ),
                       ),
                       SizedBox(height: 25),
@@ -67,7 +76,7 @@ class LoginScreen extends StatelessWidget with Helper {
                             "Forgot Password?",
                             style: TextStyle(
                               fontSize: 14,
-                              color: AppColors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -93,7 +102,7 @@ class LoginScreen extends StatelessWidget with Helper {
                             children: [
                               TextSpan(
                                 text: "Don’t have an account? ",
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.white),
                               ),
                               TextSpan(
                                 recognizer: TapGestureRecognizer()

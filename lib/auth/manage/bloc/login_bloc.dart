@@ -25,36 +25,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with Helper {
     on<LoginSubmitted>((event, emit) async {
       if (fieldCheck(state).isEmpty) {
         emit(state.copyWith(isSubmitting: true, errorMessage: null));
-        SharedPreferencesHandler().storeStringData(
-          appToken,
-          "sfsdfsdfsdf",
+        Map<String, dynamic> loginResponse = await AuthRepository().userLogin(
+          state.email,
+          state.password,
         );
-        emit(state.copyWith(isSubmitting: false, isSuccess: true));
-        // Map<String, dynamic> loginResponse = await AuthRepository().userLogin(
-        //   state.email,
-        //   state.password,
-        // );
-        //
-        // print(loginResponse);
-        //
-        // if (loginResponse['msg'].isEmpty) {
-        //   UserLoginModel response = UserLoginModel.fromJson(
-        //     loginResponse['response'],
-        //   );
-        //   emit(state.copyWith(number: response.phone ?? ""));
-        //   emit(state.copyWith(isSubmitting: false, isSuccess: true));
-        // } else {
-        //   if (loginResponse['msg'] == "otp") {
-        //     emit(state.copyWith(isSubmitting: false, errorMessage: "otp"));
-        //   } else {
-        //     emit(
-        //       state.copyWith(
-        //         isSubmitting: false,
-        //         errorMessage: loginResponse['msg'],
-        //       ),
-        //     );
-        //   }
-        // }
+
+        print(loginResponse);
+
+        if (loginResponse['msg'].isEmpty) {
+          UserLoginModel response = UserLoginModel.fromJson(
+            loginResponse['response'],
+          );
+          // emit(state.copyWith(number: response.phone ?? ""));
+          emit(state.copyWith(isSubmitting: false, isSuccess: true));
+        } else {
+          emit(
+            state.copyWith(
+              isSubmitting: false,
+              errorMessage: loginResponse['msg'],
+            ),
+          );
+        }
       } else {
         emit(
           state.copyWith(isSubmitting: false, errorMessage: fieldCheck(state)),

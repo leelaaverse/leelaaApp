@@ -21,7 +21,6 @@ class SplashScreen extends StatelessWidget with Helper {
       SplashBloc()
         ..add(StartCall()),
       child: Scaffold(
-        backgroundColor: Colors.black.withOpacity(0.3),
         body: BlocListener<SplashBloc, SplashState>(
           listener: (context, state) {
             if (state.changeScreen) {
@@ -39,13 +38,14 @@ class SplashScreen extends StatelessWidget with Helper {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(color: Colors.black),
             child: Padding(
               padding: const EdgeInsets.all(70),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(logo),
+                  Image.asset(logo, width: 300,
+                    fit: BoxFit.fitWidth,),
                   SizedBox(height: 25),
                   CircularProgressIndicator(color: AppColors.appColor),
                 ],

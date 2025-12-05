@@ -1,34 +1,38 @@
 class GenerateState {
   final String type;
+  final String ratio;
+  final String model;
+  final String prompt;
   final String userFor;
-  final List<String> notificationList;
   final bool isLoading;
   final String errorMessage;
-  final String option;
 
   GenerateState({
-    this.type = "All",
+    this.ratio = "1:1",
+    this.type = "Image",
+    this.model = "Flux Schnell (Fast - 15-20s)",
+    this.prompt = "",
     this.userFor = "",
     this.isLoading = false,
-    this.notificationList = const [],
     this.errorMessage = "",
-    this.option = "Active",
   });
 
   GenerateState copyWith({
     String? type,
+    String? ratio,
+    String? model,
+    String? prompt,
     String? userFor,
     bool? isLoading,
-    List<String>? notificationList,
     String? errorMessage,
-    String? option,
   }) {
     return GenerateState(
       userFor: userFor ?? this.userFor,
+      model: model ?? this.model,
+      ratio: ratio ?? this.ratio,
+      prompt: prompt ?? this.prompt,
       type: type ?? this.type,
       isLoading: isLoading ?? this.isLoading,
-      notificationList: notificationList ?? this.notificationList,
-      option: option ?? this.option,
       errorMessage: errorMessage ?? "",
     );
   }

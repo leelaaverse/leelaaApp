@@ -1,5 +1,6 @@
 class SignupState {
-  final String name;
+  final String firstName;
+  final String lastName;
   final String userName;
   final String countryCode;
   final String image;
@@ -14,10 +15,11 @@ class SignupState {
   final String errorMessage;
 
   SignupState({
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.userName,
     this.countryCode = "+91",
-    required this.number,
+    this.number = "",
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -30,7 +32,8 @@ class SignupState {
   });
 
   SignupState copyWith({
-    String? name,
+    String? firstName,
+    String? lastName,
     String? userName,
     String? countryCode,
     String? number,
@@ -45,7 +48,8 @@ class SignupState {
     String? image,
   }) {
     return SignupState(
-      name: name ?? this.name,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
       userName: userName ?? this.userName,
       countryCode: countryCode ?? this.countryCode,
       number: number ?? this.number,
@@ -55,7 +59,7 @@ class SignupState {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isPasswordEyeOpen: isPasswordEyeOpen ?? this.isPasswordEyeOpen,
       isConfirmPasswordEyeOpen:
-      isConfirmPasswordEyeOpen ?? this.isConfirmPasswordEyeOpen,
+          isConfirmPasswordEyeOpen ?? this.isConfirmPasswordEyeOpen,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage ?? "",
       image: image ?? this.image,
@@ -65,7 +69,8 @@ class SignupState {
   factory SignupState.initial() {
     return SignupState(
       userName: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       number: '',
       email: '',
       password: '',

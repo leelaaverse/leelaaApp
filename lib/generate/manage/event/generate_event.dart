@@ -6,14 +6,30 @@ class GetInitialData extends GenerateEvent {
 
 class BackCall extends GenerateEvent {}
 
-class MemberClick extends GenerateEvent {
-  var id;
-
-  MemberClick(this.id);
+class GenerateClick extends GenerateEvent {
+  GenerateClick();
 }
 
-class ChangeOptionSelected extends GenerateEvent {
-  var option = "";
+class onPromptChange extends GenerateEvent {
+  String? prompt;
 
-  ChangeOptionSelected(this.option);
+  onPromptChange(this.prompt);
+}
+
+class ChangeRatioSelected extends GenerateEvent {
+  String? ratio;
+
+  ChangeRatioSelected(this.ratio);
+}
+
+class ChangeTypeSelected extends GenerateEvent {
+  String? type;
+
+  ChangeTypeSelected(this.type);
+}
+
+class ChangeModelSelected extends GenerateEvent {
+  String? model;
+
+  ChangeModelSelected(this.model);
 }

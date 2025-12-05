@@ -23,6 +23,11 @@ class UnauthorizedException extends ApiException {
   UnauthorizedException() : super("Unauthorized Access");
 }
 
+class ToManyRequestException extends ApiException {
+  ToManyRequestException()
+    : super("Too many account creation attempts, please try again in 1 hour.");
+}
+
 class NotFoundException extends ApiException {
   NotFoundException() : super("Resource Not Found");
 }

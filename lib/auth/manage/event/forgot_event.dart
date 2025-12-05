@@ -6,9 +6,9 @@ import '../state/forgot_state.dart';
 abstract class ForgotEvent {}
 
 class DataChange extends ForgotEvent {
-  final String number;
+  final String email;
 
-  DataChange({this.number = ""});
+  DataChange({this.email = ""});
 }
 
 class SubmitCall extends ForgotEvent {}
@@ -31,7 +31,10 @@ class EventCallHandler with Helper {
     }
     if (state.isSuccess) {
       LoadingHandler().hideLoading();
-      callNextAndReplaceScreen(OtpScreen(state.number, isLogin: false));
+      showSuccessPopUp(state.successMessage, okPress: () {
+        callBackScreen();
+        callBackScreen();
+      });
     }
   }
 }

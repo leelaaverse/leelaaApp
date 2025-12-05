@@ -31,11 +31,14 @@ class WelcomeScreen extends StatelessWidget with Helper {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: screenHeight * 0.15),
-                    // Image.asset(logo, width: 120),
-                    Text("Leelaa", style: TextStyle(
-                        color: AppColors.appColor,
-                        fontSize: 45
-                    ),),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 70),
+                      child: Image.asset(
+                        logo,
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
 
                     SizedBox(height: screenHeight * 0.05),
                     Text(
@@ -43,6 +46,7 @@ class WelcomeScreen extends StatelessWidget with Helper {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
+                        color: Colors.white,
                         fontSize: 25,
                       ),
                     ),
@@ -65,7 +69,7 @@ class WelcomeScreen extends StatelessWidget with Helper {
                           children: [
                             TextSpan(
                               text: "Have an account already? ",
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(color: Colors.white),
                             ),
                             TextSpan(
                               recognizer: TapGestureRecognizer()
